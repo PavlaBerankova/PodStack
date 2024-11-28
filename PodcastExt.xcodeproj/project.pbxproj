@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		441C31772CF8AEBB003D5F34 /* PodcastExtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441C31762CF8AEBB003D5F34 /* PodcastExtApp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		441C31732CF8AEBB003D5F34 /* PodcastExt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastExt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		441C31762CF8AEBB003D5F34 /* PodcastExtApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastExtApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		441C316A2CF8AEBB003D5F34 = {
 			isa = PBXGroup;
 			children = (
+				441C31762CF8AEBB003D5F34 /* PodcastExtApp.swift */,
 				441C31752CF8AEBB003D5F34 /* PodcastExt */,
 				441C31742CF8AEBB003D5F34 /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441C31772CF8AEBB003D5F34 /* PodcastExtApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
