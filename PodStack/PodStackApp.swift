@@ -8,10 +8,12 @@
 import SwiftUI
 
 @main
-struct PodcastExtApp: App {
+struct PodStackApp
+: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(PodcastsViewModel())
         }
     }
 }
