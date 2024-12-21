@@ -12,7 +12,28 @@ struct MainView: View {
 
     var body: some View {
         NavigationStack {
-            Text("Vyhledat podcast \(searchText)")
+            TabView {
+                TopPodcastsView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "rectangle.grid.2x2.fill")
+                            Text("Prohlížení")
+                        }
+                    }
+
+                Text("Moje složky")
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "folder")
+                            Text("Moje složky")
+                        }
+                    }
+                ContentView()
+                    .tabItem {
+                        Image(systemName: "info")
+                        Text("Test")
+                    }
+            }
             .navigationTitle("PodStack")
         }
         .searchable(text: $searchText)
@@ -21,4 +42,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environmentObject(TopPodcastsViewModel())
+        .environmentObject(PodcastsViewModel())
 }

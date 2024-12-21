@@ -13,6 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
+            Text("Search: \(searchText)")
             List(model.podcasts, id: \.id) { item in
                 if let podcastURL = item.collectionViewUrl {
                     Link(destination: URL(string: podcastURL)!) {
@@ -45,22 +46,28 @@ struct ContentView: View {
                 }
             }
             .listStyle(.plain)
+            .searchable(text: $searchText)
         }
-        .searchable(text: $searchText)
-        .onSubmit {
-            <#code#>
-        }
-        .task {
+        .onSubmit(of: .search) {
             Task {
+                model.searchText = searchText
                 await model.fetchData()
             }
         }
-//        .onSubmit {
-//            Task {
-//                await model.fetchData(searchText: searchText)
-//            }
-//        }
-        .navigationTitle("Podcasty")
+        .onChange(of: searchText) { newValue in
+            if newValue.isEmpty {
+                model.searchText = "podcast"
+                Task {
+                    await model.fetchData()
+                }
+            }
+        }
+        .task {
+                Task {
+                    await model.fetchData()
+                }
+        }
+        .navigationTitle("PodStack")
     }
 }
 
