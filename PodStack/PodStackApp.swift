@@ -12,27 +12,16 @@ import SwiftData
 struct PodStackApp
 : App {
 
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Folder.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
                 MainView()
                     .environmentObject(PodcastsViewModel())
                     .environmentObject((TopPodcastsViewModel()))
-            }
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(for: Folder.self)
+    }
+
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
     }
 }
