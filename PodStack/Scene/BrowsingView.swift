@@ -7,41 +7,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct BrowsingView: View {
     @EnvironmentObject private var model: PodcastsViewModel
     @EnvironmentObject private var modelTop: TopPodcastsViewModel
     @State private var searchText = String()
 
     var body: some View {
         NavigationStack {
-            Text("Search: \(searchText)")
-            topPodcasts
-        }
-        .searchable(text: $searchText)
-        .onSubmit(of: .search) {
-            Task {
-                model.searchText = searchText
-                await model.fetchData()
+            VStack(alignment: .leading) {
+                Text("TOP 25")
+                    .padding([.leading, .top])
+                    .bold()
+                    .font(.title)
+                topPodcasts
             }
+                .searchable(text: $searchText)
         }
-        .onChange(of: searchText) { newValue in
-            if newValue.isEmpty {
-                model.searchText = "podcast"
-                Task {
-                    await model.fetchData()
-                }
-            }
-        }
-        .task {
-            Task {
-                await model.fetchData()
-            }
-        }
-        .navigationTitle("PodStack")
+
+//        .onSubmit(of: .search) {
+//            Task {
+//                model.searchText = searchText
+//                await model.fetchData()
+//            }
+//        }
+//        .onChange(of: searchText) { newValue in
+//            if newValue.isEmpty {
+//                model.searchText = "podcast"
+//                Task {
+//                    await model.fetchData()
+//                }
+//            }
+//        }
+//        .task {
+//            Task {
+//                await model.fetchData()
+//            }
+//        }
     }
 }
 
-extension ContentView {
+extension BrowsingView {
     private var searchedPodcast: some View {
         List(model.podcasts, id: \.id) { item in
             if let podcastURL = item.collectionViewUrl {
@@ -52,14 +57,14 @@ extension ContentView {
                                 if let image = phase.image {
                                     image
                                         .resizable()
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: 30, height: 30)
                                         .cornerRadius(8)
                                 } else if phase.error != nil {
                                     Color.red
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: 30, height: 30)
                                 } else {
                                     Color.blue
-                                        .frame(width: 50, height: 50)
+                                        .frame(width: 30, height: 30)
                                 }
                             }
                             VStack(alignment: .leading) {
@@ -106,14 +111,14 @@ extension ContentView {
         .listStyle(.plain)
         .task {
             Task {
-                await model.fetchData()
+                await modelTop.loadPodcasts()
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    BrowsingView()
         .environmentObject(PodcastsViewModel())
         .environmentObject(TopPodcastsViewModel())
 }

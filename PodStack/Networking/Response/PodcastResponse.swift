@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct Response: Codable {
     let resultCount: Int
     let results: [Podcast]

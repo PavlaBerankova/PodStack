@@ -14,7 +14,6 @@ enum TabSection: String, CaseIterable {
 
 struct MainView: View {
     @EnvironmentObject private var model: PodcastsViewModel
-    @State private var searchText = String()
     @State private var selectedTab: TabSection = .myFolders
 
     var body: some View {
@@ -25,13 +24,12 @@ struct MainView: View {
                 case .myFolders:
                     MyFolderView()
                 case .search:
-                    ContentView()
+                    BrowsingView()
                 }
             }
             .padding(.horizontal)
             Spacer()
                 .navigationTitle("PodStack")
-                .searchable(text: $searchText)
         }
     }
 }
