@@ -13,7 +13,7 @@ class TopPodcastsViewModel: ObservableObject, @preconcurrency APIFetchable {
 
     typealias PodcastType = TopPodcast
     typealias ResponseType = FeedResponse
-    var urlString: String = "https://rss.applemarketingtools.com/api/v2/cz/podcasts/top/25/podcasts.json"
+    var urlString: String = APIEndpoints.topPodcastsCz.url
 
     func getPodcasts(from response: FeedResponse) async -> [TopPodcast] {
         return response.feed.results

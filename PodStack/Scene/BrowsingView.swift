@@ -11,38 +11,45 @@ struct BrowsingView: View {
     @EnvironmentObject private var model: PodcastsViewModel
     @EnvironmentObject private var modelTop: TopPodcastsViewModel
     @State private var searchText = String()
+    @State private var isSearching = false
 
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("TOP 25")
-                    .padding([.leading, .top])
-                    .bold()
-                    .font(.title)
-                topPodcasts
+                // Výsledky vyhledávání
+                if !searchText.isEmpty && isSearching {
+                    Text("Výsledky vyhledávání")
+                        .padding([.leading, .top])
+                        .bold()
+                        .font(.title)
+                    searchedPodcast
+                } else {
+                    Text("TOP 25")
+                        .padding([.leading, .top])
+                        .bold()
+                        .font(.title)
+                    topPodcasts
+                }
             }
-                .searchable(text: $searchText)
+            .searchable(text: $searchText)
         }
-
-//        .onSubmit(of: .search) {
-//            Task {
-//                model.searchText = searchText
-//                await model.fetchData()
-//            }
-//        }
-//        .onChange(of: searchText) { newValue in
-//            if newValue.isEmpty {
-//                model.searchText = "podcast"
-//                Task {
-//                    await model.fetchData()
-//                }
-//            }
-//        }
-//        .task {
-//            Task {
-//                await model.fetchData()
-//            }
-//        }
+        .onSubmit(of: .search) {
+            Task {
+                if !searchText.isEmpty {
+                    isSearching = true
+                    await model.searchPodcast(term: searchText)
+                }
+            }
+        }
+        .onChange(of: searchText) { newValue in
+            if newValue.isEmpty {
+                searchText = String()
+                isSearching = false
+                      Task {
+                          await model.resetToDefaultPodcasts()
+                      }
+                  }
+              }
     }
 }
 
@@ -57,14 +64,14 @@ extension BrowsingView {
                                 if let image = phase.image {
                                     image
                                         .resizable()
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 50, height: 50)
                                         .cornerRadius(8)
                                 } else if phase.error != nil {
                                     Color.red
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 50, height: 50)
                                 } else {
                                     Color.blue
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 50, height: 50)
                                 }
                             }
                             VStack(alignment: .leading) {
@@ -92,7 +99,7 @@ extension BrowsingView {
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 50, height: 50)
                         .cornerRadius(8)
                 } placeholder: {
                     ProgressView()
