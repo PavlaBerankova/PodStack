@@ -13,12 +13,17 @@ class PodcastsViewModel: ObservableObject, @preconcurrency APIFetchable {
     @Published var podcasts: [Podcast] = []
 
     typealias PodcastType = Podcast
-    typealias ResponseType = Response
+    typealias ResponseType = PodcastResponse
+
     var urlString: String = APIEndpoints.podcastsCz.url
 
-    func getPodcasts(from response: Response) -> [Podcast] {
+    func getItems(from response: PodcastResponse) async -> [Podcast] {
         return response.results
     }
+
+//    func getPodcasts(from response: PodcastResponse) -> [Podcast] {
+//        return response.results
+//    }
 
     func loadPodcasts() async {
         do {
@@ -28,11 +33,12 @@ class PodcastsViewModel: ObservableObject, @preconcurrency APIFetchable {
         }
     }
 
-    func searchPodcast(term: String) async {
-        print("Searching for: \(term)")
+    func searchUrl(for term: String?) async {
+        print("Searching for: \(String(describing: term))")
         guard let searchURL = buildURL(
-            baseURL: "https://itunes.apple.com/search",
-            searchTerm: term
+            baseURL: APIEndpoints.baseSearchUrl.url,
+            searchTerm: term,
+            collectionId: nil
         ) else {
             print("Invalid url")
             return

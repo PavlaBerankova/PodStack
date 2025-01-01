@@ -12,10 +12,10 @@ class TopPodcastsViewModel: ObservableObject, @preconcurrency APIFetchable {
     @Published var topPodcasts: [TopPodcast] = []
 
     typealias PodcastType = TopPodcast
-    typealias ResponseType = FeedResponse
+    typealias ResponseType = TopPodcastResponse
     var urlString: String = APIEndpoints.topPodcastsCz.url
 
-    func getPodcasts(from response: FeedResponse) async -> [TopPodcast] {
+    func getItems(from response: TopPodcastResponse) async -> [TopPodcast] {
         return response.feed.results
     }
 

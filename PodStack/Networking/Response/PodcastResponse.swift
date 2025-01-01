@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Response: Codable {
+struct PodcastResponse: Codable {
     let resultCount: Int
     let results: [Podcast]
 }
 
 struct Podcast: Codable, Identifiable {
     var id: Int {
-        return collectionId ?? 0
+        return collectionId
     }
-    let collectionId: Int?
-    let artistName: String?
-    let collectionName: String?
+    let collectionId: Int
+    let artistName: String
+    let collectionName: String
     let collectionViewUrl: String?
     let trackViewUrl: String?
     let artworkUrl60: String?

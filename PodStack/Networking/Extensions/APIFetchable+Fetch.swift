@@ -8,7 +8,7 @@
 import Foundation
 
 extension APIFetchable {
-    func fetchData() async throws -> [PodcastType] {
+    func fetchData() async throws -> [ResponseData] {
         guard let url = URL(string: urlString) else {
             throw FetchError.invalidURL
         }
@@ -20,7 +20,12 @@ extension APIFetchable {
                 }
 
                 let decodedResponse = try JSONDecoder().decode(ResponseType.self, from: data)
-                return await getPodcasts(from: decodedResponse)
+                if let dataString = String(data: data, encoding: .utf8) {
+                                    print("Received data: \(dataString)")
+                                }
+                return await getItems(from: decodedResponse)
+
+//                return await getPodcasts(from: decodedResponse)
             } catch {
                 throw FetchError.decodingError
             }

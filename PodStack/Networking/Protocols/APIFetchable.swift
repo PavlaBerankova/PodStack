@@ -8,10 +8,9 @@
 import Foundation
 
 protocol APIFetchable {
-    associatedtype PodcastType: Codable
+    associatedtype ResponseData: Codable
     associatedtype ResponseType: Codable
-    var urlString: String { get }
 
-    // metoda, která ví, jak získat podcasts z response
-    func getPodcasts(from response: ResponseType) async -> [PodcastType]
+    var urlString: String { get }
+    func getItems(from response: ResponseType) async -> [ResponseData]
 }

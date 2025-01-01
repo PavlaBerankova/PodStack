@@ -17,6 +17,7 @@ struct PodStackApp
                 MainView()
                     .environmentObject(PodcastsViewModel())
                     .environmentObject((TopPodcastsViewModel()))
+                    .environmentObject((EpisodesViewModel()))
         }
         .modelContainer(for: Folder.self)
     }

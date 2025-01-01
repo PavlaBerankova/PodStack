@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct NewFolderView: View {
+struct AddFolderView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
     @State private var title = String()
-    @State private var podcasts = [Podcast]()
+    @State private var podcasts = [SavedPodcast]()
 
     var body: some View {
         NavigationStack {
@@ -41,5 +41,5 @@ struct NewFolderView: View {
 }
 
 #Preview {
-    NewFolderView()
+    AddFolderView()
 }

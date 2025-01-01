@@ -11,12 +11,15 @@ import SwiftData
 @Model
 final class Folder {
     var title: String
-    var podcasts: [Podcast]?
+    var podcasts: [SavedPodcast]?
     var image: Image {
         Image(systemName: "folder")
     }
+    var podcastCount: Int {
+        podcasts?.count ?? 0
+    }
 
-    init(title: String, podcasts: [Podcast]) {
+    init(title: String, podcasts: [SavedPodcast]?) {
         self.title = title
         self.podcasts = podcasts
     }

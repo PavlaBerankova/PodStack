@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedResponse: Codable {
+struct TopPodcastResponse: Codable {
     let feed: Feed
 }
 
@@ -17,9 +17,9 @@ struct Feed: Codable {
 
 struct TopPodcast: Codable, Identifiable {
     let artistName: String
-       let id: String
-       let name: String
-       let kind: String
-       let artworkUrl100: String
-       let url: String
+    let id: String
+    let name: String
+    let kind: String
+    let artworkUrl100: String
+    let url: String
 }
