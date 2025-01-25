@@ -27,7 +27,7 @@ struct PodcastEpisodesListView: View {
         }
         .task {
             Task {
-                await model.loadDataEpisode(with: collectionId)
+                await model.fetchDataAllEpisodes(with: collectionId)
             }
         }
     }

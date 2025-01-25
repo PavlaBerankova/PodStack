@@ -15,47 +15,90 @@ struct SelectedFolderDetailView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                if let podcasts = folder.podcasts {
+            if let podcasts = folder.podcasts {
+                    NavigationLink {
+                        // PodcastLastFiveEpisodesListView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "clock")
+                                .foregroundStyle(.accent)
+                            Text("Nejnovější díly")
+                        }
+                        .font(.title2)
+                        .foregroundStyle(.black)
+                        Spacer()
+                    }
+                    .padding()
+                Divider()
+
+                List {
                     ForEach(podcasts, id: \.title) { podcast in
-                            NavigationLink {
-                                PodcastEpisodesListView(collectionId: podcast.collectionId)
-                            } label: {
-                                HStack {
-                                    AsyncImage(url: URL(string: podcast.imageUrl ?? "")) { phase in
-                                        if let image = phase.image {
-                                            image
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .cornerRadius(8)
-                                        } else if phase.error != nil {
-                                            Color.red
-                                                .frame(width: 50, height: 50)
-                                                .cornerRadius(8)
-                                        } else {
-                                            Color.blue
-                                                .frame(width: 50, height: 50)
-                                                .cornerRadius(8)
-                                        }
-                                    }
-                                    VStack(alignment: .leading) {
-                                        Text(podcast.title)
-                                            .font(.title3)
-                                            .foregroundStyle(.black)
-                                        Text(podcast.artistName)
-                                            .font(.footnote)
-                                            .foregroundStyle(.gray.opacity(0.5))
+                        NavigationLink {
+                            PodcastEpisodesListView(collectionId: podcast.collectionId)
+                        } label: {
+                            HStack {
+                                AsyncImage(url: URL(string: podcast.imageUrl ?? "")) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                            .cornerRadius(8)
+                                    } else if phase.error != nil {
+                                        Color.red
+                                            .frame(width: 50, height: 50)
+                                            .cornerRadius(8)
+                                    } else {
+                                        Color.blue
+                                            .frame(width: 50, height: 50)
+                                            .cornerRadius(8)
                                     }
                                 }
+                                VStack(alignment: .leading) {
+                                    Text(podcast.title)
+                                        .font(.title3)
+                                        .foregroundStyle(.black)
+                                    Text(podcast.artistName)
+                                        .font(.footnote)
+                                        .foregroundStyle(.gray.opacity(0.5))
+                                }
                             }
+                        }
                     }
                 }
+                .listStyle(.plain)
+                .navigationTitle(folder.title)
             }
-            .navigationTitle(folder.title)
+//                .task {
+//                    Task {
+//                        await model.updateLastFiveEpisodes(for:)
+//                    }
+//                }
+        }
+        .onAppear {
+            print("FOLDER PODCASTS: \(folder.podcasts?.first?.lastFiveEpisodes)")
         }
     }
 }
 
 #Preview {
-    SelectedFolderDetailView( folder: Folder(title: "English", podcasts: [SavedPodcast(title: "Chumelenice", artistName: "Lucie", collectionId: 12345)]))
+    SelectedFolderDetailView(folder: Folder(
+        title: "English",
+        podcasts: [SavedPodcast(
+            title: "Chumelenice",
+            artistName: "Lucie",
+            collectionId: 12345,
+            lastFiveEpisodes: [Episode(
+                trackId: 1,
+                trackName: "Chumelenice",
+                description: "Bla bla bla",
+                releaseDate: "20.12.2024",
+                trackTimeMillis: 1234,
+                episodeUrl: nil,
+                artworkUrl60: nil,
+                collectionName: "Lucie Petráková")
+            ]
+        )
+        ]
+    )
+    )
 }

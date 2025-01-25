@@ -21,9 +21,9 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
         return response.results
     }
 
-    func loadDataEpisode(with collectionId: Int) async {
+    func fetchDataAllEpisodes(with collectionId: Int) async {
 
-        guard let episodesURL = URL(string: "https://itunes.apple.com/lookup?id=\(collectionId)&media=podcast&entity=podcastEpisode&limit=10&country=US") else {
+        guard let episodesURL = URL(string: "https://itunes.apple.com/lookup?id=\(collectionId)&media=podcast&entity=podcastEpisode&limit=1000&country=US") else {
             print("Invalid url")
             return
         }
@@ -32,6 +32,7 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
         self.urlString = episodesURL.absoluteString
 
         do {
+            // v metodě fetchData je obsažena metoda getItems -> [Episode], v tomto modelu je pouze definovaná
             episodes = try await fetchData()
             print("Found \(episodes.count) podcasts")
         } catch {
@@ -39,24 +40,21 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
         }
     }
 
-//    func buildEpisodeUrl(with collectionId: Int) async {
-//        guard let episodesURL = buildURL(
-//            baseURL: APIEndpoints.baseEpisodesUrl.url,
-//            searchTerm: nil,
-//            collectionId: collectionId
-//        ) else {
-//            print("Invalid url")
-//            return
-//        }
-//
-//        print("Generated URL: \(episodesURL)")
-//        self.urlString = episodesURL
-//
-//        do {
-//            episodes = try await fetchData()
-//            print("Found \(episodes.count) podcasts")
-//        } catch {
-//            print("Error searching podcasts: \(error)")
-//        }
-//    }
+    func updateLastFiveEpisodes(for podcast: SavedPodcast) async {
+        guard let episodesURL = URL(string: "https://itunes.apple.com/lookup?id=\(podcast.collectionId)&media=podcast&entity=podcastEpisode&limit=5&country=US") else {
+            print("Invalid url")
+            return
+        }
+
+        print("Generated URL: \(episodesURL)")
+        self.urlString = episodesURL.absoluteString
+
+        do {
+            let newEpisodes = try await fetchData()
+            // aktualizuje přímo SavedPodcast model
+            podcast.lastFiveEpisodes = newEpisodes
+        } catch {
+            print("Error searching podcasts: \(error)")
+        }
+    }
 }

@@ -19,8 +19,24 @@ final class Folder {
         podcasts?.count ?? 0
     }
 
+    var allSavedPodcastsCollectionId: [Int] {
+           podcasts?.map { $0.collectionId } ?? []
+       }
+
     init(title: String, podcasts: [SavedPodcast]?) {
         self.title = title
         self.podcasts = podcasts
+    }
+}
+
+extension Folder {
+    func getSavedPodcastsCollectionId() -> [Int] {
+        var collectionIds = [Int]()
+
+        if let podcasts = podcasts {
+            collectionIds = podcasts.map { $0.collectionId }
+        }
+        print("Collection Ids from all saved podcastst: \(collectionIds)")
+        return collectionIds
     }
 }

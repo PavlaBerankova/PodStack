@@ -46,7 +46,6 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 Menu {
                     Section {
                         Button {
-                            // method for create a new folder
                             actionCreateFolder()
                         } label: {
                             HStack {

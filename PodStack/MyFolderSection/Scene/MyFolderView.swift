@@ -64,7 +64,6 @@ struct MyFolderView: View {
                 .presentationDetents([.medium])
         }
     }
-
 }
 
 #Preview {

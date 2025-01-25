@@ -15,12 +15,14 @@ final class SavedPodcast {
     var imageUrl: String?
     var url: String?
     var collectionId: Int
+    var lastFiveEpisodes: [Episode]?
 
-    init(title: String, artistName: String, imageUrl: String? = nil, url: String? = nil, collectionId: Int) {
+    init(title: String, artistName: String, imageUrl: String? = nil, url: String? = nil, collectionId: Int, lastFiveEpisodes: [Episode]? = nil) {
         self.title = title
         self.artistName = artistName
         self.imageUrl = imageUrl
         self.url = url
         self.collectionId = collectionId
+        self.lastFiveEpisodes = lastFiveEpisodes
     }
 }
