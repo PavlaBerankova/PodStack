@@ -17,7 +17,7 @@ struct SelectedFolderDetailView: View {
         NavigationStack {
             if let podcasts = folder.podcasts {
                     NavigationLink {
-                        // PodcastLastFiveEpisodesListView()
+                        PodcastLastFiveEpisodesListView(folder: folder)
                     } label: {
                         HStack {
                             Image(systemName: "clock")

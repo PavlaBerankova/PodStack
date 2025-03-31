@@ -25,10 +25,8 @@ struct PodcastEpisodesListView: View {
             }
             .listStyle(.plain)
         }
-        .task {
-            Task {
-                await model.fetchDataAllEpisodes(with: collectionId)
-            }
+        .onAppear {
+            model.fetchDataAllEpisodes(with: collectionId)
         }
     }
 }
