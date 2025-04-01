@@ -17,7 +17,7 @@ extension Podcast: PodcastDisplayable {
     }
 
     var displayImageUrl: String? {
-        artworkUrl60
+        artworkUrl100
     }
 
     var displayUrl: String? {

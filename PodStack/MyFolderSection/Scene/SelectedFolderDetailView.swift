@@ -16,19 +16,19 @@ struct SelectedFolderDetailView: View {
     var body: some View {
         NavigationStack {
             if let podcasts = folder.podcasts {
-                    NavigationLink {
-                        PodcastNewestEpisodesListView(folder: folder)
-                    } label: {
-                        HStack {
-                            Image(systemName: "clock")
-                                .foregroundStyle(.accent)
-                            Text("Nejnovější díly")
-                        }
-                        .font(.title2)
-                        .foregroundStyle(.black)
-                        Spacer()
+                NavigationLink {
+                    PodcastNewestEpisodesListView(folder: folder)
+                } label: {
+                    HStack {
+                        Image(systemName: "clock")
+                            .foregroundStyle(.accent)
+                        Text("Nejnovější díly")
                     }
-                    .padding()
+                    .font(.title2)
+                    .foregroundStyle(.black)
+                    Spacer()
+                }
+                .padding()
                 Divider()
 
                 List {
@@ -63,7 +63,16 @@ struct SelectedFolderDetailView: View {
                                 }
                             }
                         }
+                        .swipeActions(edge: .leading) {
+                            if let podcastUrl = podcast.url {
+                                Link(destination: URL(string: podcastUrl)!) {
+                                    Image(systemName: "shareplay")
+                                        .tint(Color.accentColor)
+                                }
+                            }
+                        }
                     }
+
                 }
                 .listStyle(.plain)
                 .navigationTitle(folder.title)

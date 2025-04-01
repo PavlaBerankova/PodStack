@@ -100,7 +100,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
             collectionName: "Chumelenice",
             collectionViewUrl: nil,
             trackViewUrl: nil,
-            artworkUrl60: nil
+            artworkUrl100: nil
         ),
         folders: [
             Folder(
