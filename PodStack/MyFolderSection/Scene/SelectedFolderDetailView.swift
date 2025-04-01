@@ -17,7 +17,7 @@ struct SelectedFolderDetailView: View {
         NavigationStack {
             if let podcasts = folder.podcasts {
                     NavigationLink {
-                        PodcastLastFiveEpisodesListView(folder: folder)
+                        PodcastNewestEpisodesListView(folder: folder)
                     } label: {
                         HStack {
                             Image(systemName: "clock")
@@ -68,14 +68,10 @@ struct SelectedFolderDetailView: View {
                 .listStyle(.plain)
                 .navigationTitle(folder.title)
             }
-//                .task {
-//                    Task {
-//                        await model.updateLastFiveEpisodes(for:)
-//                    }
-//                }
         }
         .onAppear {
-            print("FOLDER PODCASTS: \(folder.podcasts?.first?.lastFiveEpisodes)")
+            print("FOLDER NAME: \(folder.title)")
+            print("Collection IDs: \(folder.allSavedPodcastsCollectionId)")
         }
     }
 }

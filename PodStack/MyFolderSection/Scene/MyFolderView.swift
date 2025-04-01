@@ -11,6 +11,8 @@ import SwiftData
 struct MyFolderView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Folder.title) private var folders: [Folder]
+
+    @StateObject var model = EpisodesViewModel()
     @State private var createNewFolder = false
     @State private var folderToEdit: Folder?
 
