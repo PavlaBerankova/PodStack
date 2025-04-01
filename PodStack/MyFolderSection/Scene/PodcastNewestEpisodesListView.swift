@@ -22,6 +22,8 @@ struct PodcastNewestEpisodesListView: View {
                     }
                 }
             }
+            .navigationTitle("Nejnovější epizody")
+            .navigationBarTitleDisplayMode(.inline)
             .listStyle(.plain)
              .onAppear {
                model.fetchLastThreeEpisodesFolderPodcasts(with: folder.allSavedPodcastsCollectionId)

@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
+class EpisodesViewModel: ObservableObject, APIFetchable {
 
     // MARK: TEST COMBINE
     @Published var episodes: [Episode] = []
@@ -29,7 +29,7 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
             return URLSession.shared.dataTaskPublisher(for: url)
                 .map(\.data)
                 .decode(type: EpisodesResponse.self, decoder: JSONDecoder())
-                .map { Array($0.results.prefix(4)) }  // Vezme jen 4 epizody, první index je vždy jen název podcastu
+                .map { Array($0.results.prefix(4)) } // Vezme jen 4 epizody, první index je vždy jen název podcastu
                 .replaceError(with: [])  // Ošetří chybu a vrátí prázdné pole
                 .eraseToAnyPublisher()
         }
@@ -51,8 +51,7 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
             return lastThreeEpisodes
                 .enumerated()
                 .filter { $0.offset % 4 != 0 }
-                .map { $0.element }
-
+                .map { $0.element }.sorted { $0.releaseDate > $1.releaseDate }
         }
         return Array(episodes.enumerated().dropFirst().map { $0.element })
     }

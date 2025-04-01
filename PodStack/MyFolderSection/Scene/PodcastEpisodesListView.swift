@@ -13,6 +13,7 @@ struct PodcastEpisodesListView: View {
     //    @Query private var savedPodcast: [SavedPodcast]
     @EnvironmentObject private var model: EpisodesViewModel
     let collectionId: Int
+    let podcastTitle: String
 
     var body: some View {
         NavigationStack {
@@ -25,6 +26,8 @@ struct PodcastEpisodesListView: View {
                     }
                 }
             }
+            .navigationTitle(podcastTitle)
+            .navigationBarTitleDisplayMode(.inline)
             .listStyle(.plain)
         }
         .onAppear {

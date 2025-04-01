@@ -22,7 +22,7 @@ struct SelectedFolderDetailView: View {
                     HStack {
                         Image(systemName: "clock")
                             .foregroundStyle(.accent)
-                        Text("Nejnovější díly")
+                        Text("Nejnovější epizody")
                     }
                     .font(.title2)
                     .foregroundStyle(.black)
@@ -34,7 +34,7 @@ struct SelectedFolderDetailView: View {
                 List {
                     ForEach(podcasts, id: \.title) { podcast in
                         NavigationLink {
-                            PodcastEpisodesListView(collectionId: podcast.collectionId)
+                            PodcastEpisodesListView(collectionId: podcast.collectionId, podcastTitle: podcast.title)
                         } label: {
                             HStack {
                                 AsyncImage(url: URL(string: podcast.imageUrl ?? "")) { phase in
