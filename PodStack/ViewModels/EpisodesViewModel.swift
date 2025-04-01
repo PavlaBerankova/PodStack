@@ -24,6 +24,7 @@ class EpisodesViewModel: ObservableObject, @preconcurrency APIFetchable {
                 print("Invalid URL")
                 return nil
             }
+            
 
             return URLSession.shared.dataTaskPublisher(for: url)
                 .map(\.data)

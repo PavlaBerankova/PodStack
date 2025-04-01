@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EpisodeRowView: View {
+struct EpisodeRowDetailView: View {
     let episode: Episode
 
     var body: some View {

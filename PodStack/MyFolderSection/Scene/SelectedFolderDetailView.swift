@@ -90,7 +90,7 @@ struct SelectedFolderDetailView: View {
                 releaseDate: "20.12.2024",
                 trackTimeMillis: 1234,
                 episodeUrl: nil,
-                artworkUrl60: nil,
+                artworkUrl600: nil,
                 collectionName: "Lucie Petráková")
             ]
         )

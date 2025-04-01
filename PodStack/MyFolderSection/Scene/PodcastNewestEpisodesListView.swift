@@ -15,7 +15,7 @@ struct PodcastNewestEpisodesListView: View {
         NavigationStack {
             List {
                 ForEach(model.dropPodcastTitle(isEpisodesCollection: true), id: \.id) { episode in
-                    EpisodeRowView(episode: episode)
+                    EpisodeRowPictureView(episode: episode)
                 }
             }
             .listStyle(.plain)

@@ -18,7 +18,7 @@ struct PodcastEpisodesListView: View {
         NavigationStack {
             List {
                 ForEach(model.dropPodcastTitle(), id: \.id) { episode in
-                    EpisodeRowView(episode: episode)
+                    EpisodeRowDetailView(episode: episode)
                 }
             }
             .listStyle(.plain)
