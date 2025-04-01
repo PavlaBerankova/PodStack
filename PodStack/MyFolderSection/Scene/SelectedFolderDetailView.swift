@@ -72,7 +72,15 @@ struct SelectedFolderDetailView: View {
                             }
                         }
                     }
-
+                    .onDelete { indexSet in
+                        indexSet.forEach { index in
+                            if let selectedPodcast = folder.podcasts {
+                                let podcastToDelete = selectedPodcast[index]
+                                context.delete(podcastToDelete)
+                                try? context.save()
+                            }
+                        }
+                    }
                 }
                 .listStyle(.plain)
                 .navigationTitle(folder.title)
