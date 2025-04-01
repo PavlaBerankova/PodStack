@@ -78,15 +78,19 @@ extension BrowsingView {
 
     private var topPodcasts: some View {
         List(Array(modelTop.topPodcasts.enumerated()), id: \.element.id) { index, podcast in
-            HStack {
-                Text(String(index + 1))
-                    .font(.title2)
+            if let topPodcastUrl = podcast.url {
+                Link(destination: URL(string: topPodcastUrl)!) {
+                    HStack {
+                        Text(String(index + 1))
+                            .font(.title2)
 
-                PodcastRowView(
-                    podcast: podcast,
-                    folders: folders,
-                    actionMenu: { print(savedPodcast.first) },
-                    actionCreateFolder: { })
+                        PodcastRowView(
+                            podcast: podcast,
+                            folders: folders,
+                            actionMenu: { print(savedPodcast.first) },
+                            actionCreateFolder: { })
+                    }
+                }
             }
         }
         .listStyle(.plain)

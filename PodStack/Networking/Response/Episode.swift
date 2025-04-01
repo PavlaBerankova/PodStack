@@ -16,7 +16,7 @@ struct Episode: Codable, Identifiable {
     let description: String?
     let releaseDate: String
     let trackTimeMillis: Int?
-    let episodeUrl: String?
+    let trackViewUrl: String? // link to Apple podcast
     let artworkUrl600: String?
     let collectionName: String
 

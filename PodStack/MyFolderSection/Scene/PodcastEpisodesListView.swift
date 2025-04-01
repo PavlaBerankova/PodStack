@@ -18,7 +18,11 @@ struct PodcastEpisodesListView: View {
         NavigationStack {
             List {
                 ForEach(model.dropPodcastTitle(), id: \.id) { episode in
-                    EpisodeRowDetailView(episode: episode)
+                    if let episodeUrl = episode.trackViewUrl {
+                        Link(destination: URL(string: episodeUrl)!) {
+                            EpisodeRowDetailView(episode: episode)
+                        }
+                    }
                 }
             }
             .listStyle(.plain)

@@ -12,18 +12,21 @@ struct EpisodeRowDetailView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(episode.releaseDate)
+            Text(episode.timeAgo)
                 .foregroundStyle(.secondary)
                 .font(.caption)
                 Text(episode.trackName)
+                .lineLimit(3)
                 .bold()
 
             Text(episode.description ?? "")
-                .lineLimit(2)
+                .lineLimit(3)
+                .font(.caption)
                 .foregroundStyle(.secondary)
-            if let trackDuration = episode.trackTimeMillis {
+            if let trackDuration = episode.trackDuration {
                 Text(String(trackDuration))
                     .foregroundStyle(.accent)
+                    .font(.footnote)
                     .bold()
             }
         }

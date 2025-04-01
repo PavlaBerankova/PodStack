@@ -14,12 +14,3 @@ struct TopPodcastResponse: Codable {
 struct Feed: Codable {
     let results: [TopPodcast]
 }
-
-struct TopPodcast: Codable, Identifiable {
-    let artistName: String
-    let id: String
-    let name: String
-    let kind: String
-    let artworkUrl100: String
-    let url: String
-}
