@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PodcastNewestEpisodesListView: View {
+struct LatestPodcastsEpisodesListView: View {
     @EnvironmentObject private var model: EpisodesViewModel
     let folder: Folder
 

@@ -19,7 +19,7 @@ struct MyFolderView: View {
     var body: some View {
         List {
             ForEach(folders) { folder in
-                NavigationLink(destination: SelectedFolderDetailView(folder: folder)) {
+                NavigationLink(destination: SelectedFolderPodcastsListView(folder: folder)) {
                     HStack {
                         folder.image
                             .foregroundStyle(Color.accentColor)

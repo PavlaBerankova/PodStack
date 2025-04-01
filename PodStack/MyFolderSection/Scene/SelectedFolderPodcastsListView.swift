@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct SelectedFolderDetailView: View {
+struct SelectedFolderPodcastsListView: View {
     @Environment(\.modelContext) var context
     @EnvironmentObject private var model: EpisodesViewModel
     let folder: Folder
@@ -17,7 +17,7 @@ struct SelectedFolderDetailView: View {
         NavigationStack {
             if let podcasts = folder.podcasts {
                 NavigationLink {
-                    PodcastNewestEpisodesListView(folder: folder)
+                    LatestPodcastsEpisodesListView(folder: folder)
                 } label: {
                     HStack {
                         Image(systemName: "clock")
@@ -94,7 +94,7 @@ struct SelectedFolderDetailView: View {
 }
 
 #Preview {
-    SelectedFolderDetailView(folder: Folder(
+    SelectedFolderPodcastsListView(folder: Folder(
         title: "English",
         podcasts: [SavedPodcast(
             title: "Chumelenice",
