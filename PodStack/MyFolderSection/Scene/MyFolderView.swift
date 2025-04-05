@@ -47,6 +47,7 @@ struct MyFolderView: View {
                 }
             }
         }
+        .navigationTitle("Moje složky")
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

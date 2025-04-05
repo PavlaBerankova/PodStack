@@ -36,7 +36,7 @@ struct BrowsingView: View {
                     topPodcasts
                 }
             }
-            .searchable(text: $searchText)
+            .searchable(text: $searchText, prompt: "Vyhledávání")
         }
         .onSubmit(of: .search) {
             Task {

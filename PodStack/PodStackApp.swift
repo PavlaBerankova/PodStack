@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct PodStackApp
-: App {
+struct PodStackApp: App {
 
     var body: some Scene {
         WindowGroup {
@@ -18,7 +17,7 @@ struct PodStackApp
                     .environmentObject(PodcastsViewModel())
                     .environmentObject((TopPodcastsViewModel()))
                     .environmentObject((EpisodesViewModel()))
-        }
+            }
         .modelContainer(for: Folder.self)
     }
 
