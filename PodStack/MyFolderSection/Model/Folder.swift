@@ -13,7 +13,7 @@ final class Folder {
     var title: String
     var podcasts: [SavedPodcast]?
     var image: Image {
-        Image(systemName: "folder")
+        Image(systemName: "rectangle.stack")
     }
     var podcastCount: Int {
         podcasts?.count ?? 0

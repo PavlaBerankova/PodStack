@@ -32,12 +32,13 @@ struct BrowsingView: View {
                     Text("TOP 25")
                         .padding([.leading, .top])
                         .bold()
-                        .font(.title)
+                        .font(.title2)
                     topPodcasts
                 }
             }
             .searchable(text: $searchText)
         }
+        .navigationTitle("PodStack")
         .onSubmit(of: .search) {
             Task {
                 if !searchText.isEmpty {

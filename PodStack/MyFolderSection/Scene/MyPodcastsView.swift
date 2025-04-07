@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct MyFolderView: View {
+struct MyPodcastsView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Folder.title) private var folders: [Folder]
 
@@ -47,6 +47,7 @@ struct MyFolderView: View {
                 }
             }
         }
+        .navigationTitle("Moje podcasty")
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -70,6 +71,6 @@ struct MyFolderView: View {
 
 #Preview {
     NavigationStack {
-        MyFolderView()
+        MyPodcastsView()
     }
 }

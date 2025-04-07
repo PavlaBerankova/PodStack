@@ -83,7 +83,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                         }
                     }
                 } label: {
-                    Image(systemName: "plus.circle")
+                    Image(systemName: "rectangle.stack.badge.plus")
                         .font(.title2)
                         .foregroundStyle(.accent)
                 }
