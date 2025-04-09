@@ -94,14 +94,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
 
 #Preview {
     PodcastRowView(
-        podcast: Podcast(
-            collectionId: 1,
-            artistName: "Lucie Petráková a Markéta Lukášková",
-            collectionName: "Chumelenice",
-            collectionViewUrl: nil,
-            trackViewUrl: nil,
-            artworkUrl100: nil
-        ),
+        podcast: Podcasts.mock.podcasts[1],
         folders: [
             Folder(
                 title: "English",

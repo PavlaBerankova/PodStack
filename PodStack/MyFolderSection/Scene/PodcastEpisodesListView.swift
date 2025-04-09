@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct PodcastEpisodesListView: View {
-    //    @Environment(\.modelContext) private var context
-    //    @Query private var savedPodcast: [SavedPodcast]
     @EnvironmentObject private var model: EpisodesViewModel
     let collectionId: Int
     let podcastTitle: String
@@ -36,7 +34,10 @@ struct PodcastEpisodesListView: View {
     }
 }
 
-//#Preview {
-//    PodcastEpisodesListView(selectedPodcast: <#SavedPodcast#>)
-//        .environmentObject(EpisodesViewModel())
-//}
+#Preview {
+    PodcastEpisodesListView(
+        collectionId: Episodes.mock.episodes.first!.trackId,
+        podcastTitle: Episodes.mock.episodes.first!.trackName
+    )
+        .environmentObject(EpisodesViewModel())
+}

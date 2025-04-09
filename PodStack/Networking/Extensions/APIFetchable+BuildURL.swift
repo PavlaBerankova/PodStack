@@ -14,7 +14,6 @@ extension APIFetchable {
             urlComponents?.queryItems = [
                 URLQueryItem(name: "media", value: "podcast"),
                 URLQueryItem(name: "term", value: searchTerm),
-               // URLQueryItem(name: "country", value: "cz"),
                 URLQueryItem(name: "limit", value: limit),
                 URLQueryItem(name: "id", value: String(collectionId ?? 0))
             ]

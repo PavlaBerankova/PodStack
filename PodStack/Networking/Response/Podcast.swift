@@ -14,7 +14,7 @@ struct Podcast: Codable, Identifiable {
     let collectionId: Int
     let artistName: String
     let collectionName: String
-    let collectionViewUrl: String?
+    let collectionViewUrl: String? // odkaz na Apple podcast
     let trackViewUrl: String?
     let artworkUrl100: String?
 }

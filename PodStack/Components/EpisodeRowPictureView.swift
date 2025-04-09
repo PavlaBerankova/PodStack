@@ -49,14 +49,6 @@ struct EpisodeRowPictureView: View {
     }
 }
 
-//#Preview {
-//    EpisodeRowPictureView(episode: Episode(
-//        trackId: 1,
-//        trackName: "Vinohradská 12",
-//        description: <#T##String?#>,
-//        releaseDate: <#T##String#>,
-//        trackTimeMillis: <#T##Int?#>,
-//        episodeUrl: <#T##String?#>,
-//        artworkUrl60: <#T##String?#>,
-//        collectionName: <#T##String#>))
-//}
+#Preview {
+    EpisodeRowPictureView(episode: Episodes.mock.episodes[1])
+}

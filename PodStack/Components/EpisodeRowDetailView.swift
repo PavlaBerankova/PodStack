@@ -32,3 +32,7 @@ struct EpisodeRowDetailView: View {
         }
     }
 }
+
+#Preview {
+    EpisodeRowDetailView(episode: Episodes.mock.episodes.first!)
+}

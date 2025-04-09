@@ -95,23 +95,7 @@ struct SelectedFolderPodcastsListView: View {
 
 #Preview {
     SelectedFolderPodcastsListView(folder: Folder(
-        title: "English",
-        podcasts: [SavedPodcast(
-            title: "Chumelenice",
-            artistName: "Lucie",
-            collectionId: 12345,
-            lastFiveEpisodes: [Episode(
-                trackId: 1,
-                trackName: "Chumelenice",
-                description: "Bla bla bla",
-                releaseDate: "20.12.2024",
-                trackTimeMillis: 1234,
-                trackViewUrl: nil,
-                artworkUrl600: nil,
-                collectionName: "Lucie Petráková")
-            ]
-        )
-        ]
-    )
+        title: "Tech",
+        podcasts: SavedPodcasts.mock.savedPodcasts)
     )
 }

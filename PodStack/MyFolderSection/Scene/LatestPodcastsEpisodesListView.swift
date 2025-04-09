@@ -1,6 +1,6 @@
 //
 //  PodcastLastFiveEpisodesListView.swift
-//  PodStack 
+//  PodStack
 //
 //  Created by Pavla Beránková on 08.01.2025.
 //
@@ -25,14 +25,23 @@ struct LatestPodcastsEpisodesListView: View {
             .navigationTitle("Nejnovější epizody")
             .navigationBarTitleDisplayMode(.inline)
             .listStyle(.plain)
-             .onAppear {
-               model.fetchLastThreeEpisodesFolderPodcasts(with: folder.allSavedPodcastsCollectionId)
-             }
+            .onAppear {
+                model.fetchLastThreeEpisodesFolderPodcasts(with: folder.allSavedPodcastsCollectionId)
+            }
         }
     }
 }
 
 
-//#Preview {
-//    PodcastLastFiveEpisodesListView()
-//}
+#Preview {
+    LatestPodcastsEpisodesListView(
+        folder:
+            Folder(
+                title: "Tech",
+                podcasts: [
+                    SavedPodcasts.mock.savedPodcasts.first!,
+                ]
+            )
+    )
+    .environmentObject(EpisodesViewModel())
+}
