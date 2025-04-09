@@ -18,6 +18,7 @@ struct BrowsingView: View {
     @EnvironmentObject private var modelTop: TopPodcastsViewModel
     @State private var searchText = String()
     @State private var isSearching = false
+    @State private var createFolderIsPresented: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -44,7 +45,6 @@ struct BrowsingView: View {
                 if !searchText.isEmpty {
                     isSearching = true
                     await model.searchUrl(for: searchText)
-                   // await model.stringUrl(for term: searchText)
                 }
             }
         }
@@ -57,6 +57,9 @@ struct BrowsingView: View {
                 }
             }
         }
+        .sheet(isPresented: $createFolderIsPresented) {
+            AddFolderView()
+        }
     }
 }
 
@@ -67,9 +70,7 @@ extension BrowsingView {
                 Link(destination: URL(string: podcastURL)!) {
                     PodcastRowView(
                         podcast: podcast,
-                        folders: folders,
-                        actionMenu: { print(savedPodcast.first) },
-                        actionCreateFolder: { }
+                        folders: folders
                     )
                 }
             }
@@ -87,9 +88,8 @@ extension BrowsingView {
 
                         PodcastRowView(
                             podcast: podcast,
-                            folders: folders,
-                            actionMenu: { print(savedPodcast.first) },
-                            actionCreateFolder: { })
+                            folders: folders
+                        )
                     }
                 }
             }

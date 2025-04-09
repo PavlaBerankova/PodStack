@@ -10,11 +10,10 @@ import SwiftUI
 struct PodcastRowView<T: PodcastDisplayable>: View {
     @Environment(\.modelContext) var context
     @State private var selectedFolder: Folder? = nil
+    @State private var isShowingAddFolderView: Bool = false
 
     var podcast: T
     var folders: [Folder]?
-    var actionMenu: () -> Void
-    var actionCreateFolder: () -> Void
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -46,7 +45,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 Menu {
                     Section {
                         Button {
-                            actionCreateFolder()
+                            isShowingAddFolderView.toggle()
                         } label: {
                             HStack {
                                 Text("Vytvořit novou složku")
@@ -72,7 +71,6 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                                     }
 
                                     try? context.save()
-                                    actionMenu()
                                 } label: {
                                     HStack {
                                         Text(folder.title)
@@ -89,6 +87,9 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingAddFolderView) {
+            AddFolderView()
+        }
     }
 }
 
@@ -104,9 +105,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 title: "Comedy",
                 podcasts: nil
             )
-        ],
-        actionMenu: { print("podcast added") },
-        actionCreateFolder: { print("folder created") }
+        ]
     )
     .padding(.horizontal)
 }
