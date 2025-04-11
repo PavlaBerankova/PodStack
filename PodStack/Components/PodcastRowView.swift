@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-struct PodcastRowView<T: PodcastDisplayable>: View {
-    @Environment(\.modelContext) var context
-    @State private var selectedFolder: Folder? = nil
-    @State private var isShowingAddFolderView: Bool = false
-
-    var podcast: T
+struct PodcastRowView: View {
+    @ObservedObject var model = FolderViewModel()
+    @Environment(\.modelContext) private var context
+    var podcast: any PodcastDisplayable
     var folders: [Folder]?
 
     var body: some View {
@@ -45,7 +43,8 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 Menu {
                     Section {
                         Button {
-                            isShowingAddFolderView.toggle()
+                            model.selectedPodcast = podcast
+                            model.isShowingAddFolderView = true
                         } label: {
                             HStack {
                                 Text("Vytvořit novou složku")
@@ -61,14 +60,19 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                                 Button {
                                     // method for add podcast to selected folder
                                     print("Folder: \(folder.title)")
-                                    selectedFolder = folder
-                                    let savedPodcast = podcast.toSavedPodcast()
+                                    model.selectedFolder = folder
+                                    if let selectedPodcast = model.selectedPodcast {
+                                        let savedPodcast = selectedPodcast.toSavedPodcast()
 
-                                    if selectedFolder?.podcasts == nil {
-                                        selectedFolder?.podcasts = [savedPodcast]
-                                    } else {
-                                        selectedFolder?.podcasts?.append(savedPodcast)
+                                        if model.selectedFolder?.podcasts == nil {
+                                            model.selectedFolder?.podcasts = [savedPodcast]
+                                        } else {
+                                            model.selectedFolder?.podcasts?.append(savedPodcast)
+                                        }
                                     }
+//                                    let savedPodcast = model.selectedPodcast.toSavedPodcast()
+
+
 
                                     try? context.save()
                                 } label: {
@@ -87,7 +91,7 @@ struct PodcastRowView<T: PodcastDisplayable>: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowingAddFolderView) {
+        .sheet(isPresented: $model.isShowingAddFolderView) {
             AddFolderView()
         }
     }

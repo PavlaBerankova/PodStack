@@ -10,22 +10,21 @@ import SwiftUI
 struct AddFolderView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
-    @State private var title = String()
-    @State private var podcasts = [SavedPodcast]()
+    @ObservedObject var model = FolderViewModel()
 
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Název složky", text: $title)
+                TextField("Název složky", text: $model.folderTitle)
                 Button("Vytvořit") {
-                    let newFolder = Folder(title: title, podcasts: podcasts)
+                    let newFolder = Folder(title: model.folderTitle, podcasts: model.folderPodcasts)
                     context.insert(newFolder)
                     dismiss()
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .buttonStyle(.borderedProminent)
                 .padding(.vertical)
-                .disabled(title.isEmpty)
+                .disabled(model.folderTitle.isEmpty)
             }
             .navigationTitle("Nová složka")
             .navigationBarTitleDisplayMode(.inline)
