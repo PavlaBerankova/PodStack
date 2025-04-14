@@ -9,7 +9,9 @@ import SwiftUI
 
 struct BrowsingPodcastRowView: View {
     @ObservedObject var model = FolderFormViewModel()
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) private
+    var context
+
     var podcast: any PodcastDisplayable
     var folders: [Folder]?
 
@@ -70,10 +72,6 @@ struct BrowsingPodcastRowView: View {
                                             model.selectedFolder?.podcasts?.append(savedPodcast)
                                         }
                                     }
-//                                    let savedPodcast = model.selectedPodcast.toSavedPodcast()
-
-
-
                                     try? context.save()
                                 } label: {
                                     HStack {

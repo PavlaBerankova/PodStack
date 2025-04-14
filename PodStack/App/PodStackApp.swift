@@ -5,8 +5,8 @@
 //  Created by Pavla Beránková on 28.11.2024.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct PodStackApp: App {
