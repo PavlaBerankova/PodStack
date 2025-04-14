@@ -1,0 +1,45 @@
+//
+//  PodcastLastFiveEpisodesListView.swift
+//  PodStack
+//
+//  Created by Pavla Beránková on 08.01.2025.
+//
+
+import SwiftUI
+
+struct FolderRecentEpisodesView: View {
+    @EnvironmentObject private var model: EpisodesViewModel
+    let folder: Folder
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(model.dropPodcastTitle(isEpisodesCollection: true), id: \.id) { episode in
+                    if let episodeUrl = episode.trackViewUrl {
+                        Link(destination: URL(string: episodeUrl)!) {
+                            EpisodeRowPictureView(episode: episode)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Nejnovější epizody")
+            .navigationBarTitleDisplayMode(.inline)
+            .listStyle(.plain)
+            .onAppear {
+                model.fetchLastThreeEpisodesFolderPodcasts(with: folder.allSavedPodcastsCollectionId)
+            }
+        }
+    }
+}
+
+
+#Preview {
+    FolderRecentEpisodesView(
+        folder:
+            Folder(
+                title: "Tech",
+                podcasts: SavedPodcast.mock
+            )
+    )
+    .environmentObject(EpisodesViewModel())
+}
